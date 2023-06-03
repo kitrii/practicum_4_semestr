@@ -1,0 +1,7 @@
+-------------------------
+2023-06-03 15:29:40.310336: Пользователь Ekaterina авторизовался
+-------------------------
+2023-06-03 15:35:15.377223: От пользователя /Users/enagikh/practicum_4_semestr/ftp_server/documents/Ekaterina получено ''
+-------------------------
+2023-06-03 15:35:15.378889: Пользователю /Users/enagikh/practicum_4_semestr/ftp_server/documents/Ekaterina отправлено 'incorrect request
+'
