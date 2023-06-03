@@ -1,0 +1,12 @@
+INFO:root:Запуск сервера
+INFO:root:Начало прослушивания порта 9091
+INFO:root:<socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 9091), raddr=('127.0.0.1', 65165)>
+('127.0.0.1', 65165)
+INFO:root:Подключился клиент
+INFO:root:Прием данных от клиента
+INFO:root:Hello
+INFO:root:Прием данных от клиента
+INFO:root:GoodBuy
+INFO:root:Прием данных от клиента
+INFO:root:exit
+INFO:root:Клиент отключился
