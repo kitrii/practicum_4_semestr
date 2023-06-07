@@ -19,22 +19,22 @@ def write_auth(fileName, data, currentPath=os.getcwd()):
     os.chdir(currentPath)
 
 
-def writeLog(fileName, text):
+def write_log(fileName, text):
     with open(fileName, 'a', encoding=ENCODING) as logFile:
         logFile.write(f"{'-' * 25}\n{datetime.now()}: {text}\n")
 
 
-def req_password(sock, conn, correctPassword, login):
+def req_password(sock, conn, correct_password, login):
     password = make_request(conn, REQUEST_PASSWORD)
-    if password == correctPassword:
+    if password == correct_password:
         handle(sock, conn, login)
     else:
-        req_password(sock, conn, correctPassword, login)
+        req_password(sock, conn, correct_password, login)
 
 
-def requestNewPassword(sock, conn, login):
-    newPassword = make_request(conn, REQUEST_NEW_PASSWORD)
-    write_auth(AUTH_FILE, {login: newPassword}, currentPath=os.getcwd())
+def request_new_password(sock, conn, login):
+    new_password = make_request(conn, REQUEST_NEW_PASSWORD)
+    write_auth(AUTH_FILE, {login: new_password}, currentPath=os.getcwd())
     handle(sock, conn, login)
 
 
@@ -57,7 +57,7 @@ def authorization(sock, conn):
     if login in logins:
         req_password(sock, conn, logins[login], login)
     else:
-        requestNewPassword(sock, conn, login)
+        request_new_password(sock, conn, login)
 
 
 def accept(sock):

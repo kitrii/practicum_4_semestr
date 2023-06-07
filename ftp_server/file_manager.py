@@ -1,6 +1,6 @@
 import shutil
 
-from server import writeLog, send, recv
+from server import write_log, send, recv
 from settings import *
 
 
@@ -134,12 +134,12 @@ class FileManager:
 
     def processing(self, request):
         command, *args = request.split(' ')
-        writeLog(LOG, f"От пользователя {self.root} получено '{request}'")
+        write_log(LOG, f"От пользователя {self.root} получено '{request}'")
         try:
             response = self.COMMANDS[command](self, *args)
         except:
             response = 'incorrect request\n'
-        writeLog(LOG, f"Пользователю {self.root} отправлено '{response}'")
+        write_log(LOG, f"Пользователю {self.root} отправлено '{response}'")
         return response
 
     COMMANDS = {
@@ -160,7 +160,7 @@ def handle(sock, conn, login):
     checkDirectory(login)
     fileManager = FileManager(sock, conn, login)
     send(conn, CORRECT_PASSWORD + '\n' + fileManager.login + '$' + fileManager.pwd()[:-1] + '>')
-    writeLog(LOG, f'Пользователь {fileManager.login} авторизовался')
+    write_log(LOG, f'Пользователь {fileManager.login} авторизовался')
     while True:
         try:
             request = recv(conn)
