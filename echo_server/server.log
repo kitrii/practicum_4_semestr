@@ -10,3 +10,40 @@ INFO:root:GoodBuy
 INFO:root:Прием данных от клиента
 INFO:root:exit
 INFO:root:Клиент отключился
+INFO:root:Запуск сервера
+INFO:root:Начало прослушивания порта 9999
+INFO:root:<socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 9999), raddr=('127.0.0.1', 51074)>
+('127.0.0.1', 51074)
+INFO:root:Подключился клиент
+INFO:root:Прием данных от клиента
+INFO:root:Отправка данных клиенту обратно
+INFO:root:lll
+INFO:root:Запуск сервера
+INFO:root:Начало прослушивания порта 8989
+INFO:root:<socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8989), raddr=('127.0.0.1', 51135)>
+('127.0.0.1', 51135)
+INFO:root:Подключился клиент
+INFO:root:<socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8989), raddr=('127.0.0.1', 51139)>
+('127.0.0.1', 51139)
+INFO:root:Подключился клиент
+INFO:root:Прием данных от клиента
+INFO:root:hello
+INFO:root:Отправка данных клиенту обратно
+INFO:root:<socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8989), raddr=('127.0.0.1', 51258)>
+('127.0.0.1', 51258)
+INFO:root:Подключился клиент
+INFO:root:Прием данных от клиента
+INFO:root:р
+INFO:root:Отправка данных клиенту обратно
+INFO:root:<socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8989), raddr=('127.0.0.1', 51266)>
+('127.0.0.1', 51266)
+INFO:root:Подключился клиент
+INFO:root:Прием данных от клиента
+INFO:root:h
+INFO:root:Отправка данных клиенту обратно
+INFO:root:<socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8989), raddr=('127.0.0.1', 51270)>
+('127.0.0.1', 51270)
+INFO:root:Подключился клиент
+INFO:root:Прием данных от клиента
+INFO:root:оо
+INFO:root:Отправка данных клиенту обратно

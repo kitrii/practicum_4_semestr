@@ -21,29 +21,32 @@ except:
     sock.bind(('', random_port))
     log(f"Не получилось подключиться к порту {port}! Начало прослушивания порта {random_port}!")
 
-sock.listen(10)
-conn, address = sock.accept()
-try:
-    with open('auth.json', 'r') as auth:
-        file = json.loads(auth.read())
-        if address[0] == file['host']:
-            print(f"Добро пожаловать! {file['name']}")
-        else:
-            with open('auth.json', 'w') as auth:
-                auth.write(json.dumps({"host": f"{address[0]}", "name": "Stranger"}))
-except:
-    with open('auth.json', 'w') as auth:
-        auth.write(json.dumps({"host": f"{address[0]}", "name": "Stranger"}))
-
-
-log(f"{conn}\n{address}")
-log("Подключился клиент")
 
 while True:
+    sock.listen(1)
+    conn, address = sock.accept()
+
+    try:
+        with open('auth.json', 'r') as auth:
+            file = json.loads(auth.read())
+            if address[0] == file['host']:
+                print(f"Добро пожаловать! {file['name']}")
+            else:
+                with open('auth.json', 'w') as auth:
+                    auth.write(json.dumps({"host": f"{address[0]}", "name": "Stranger"}))
+    except:
+        with open('auth.json', 'w') as auth:
+            auth.write(json.dumps({"host": f"{address[0]}", "name": "Stranger"}))
+
+    log("Подключился клиент")
+
     data = conn.recv(1024).decode()
     if data:
         log("Прием данных от клиента")
         log(data)
+        conn.send(str(data).encode())
+        log("Отправка данных клиенту обратно")
+
     if data == 'exit':
         log('Клиент отключился')
         conn, address = sock.accept()

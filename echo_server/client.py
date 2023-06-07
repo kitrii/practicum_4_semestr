@@ -14,9 +14,11 @@ else:
 print("Соединение с сервером")
 
 while True:
-    word = input()
+    word = input("Введите сообщение для сервера: ")
     sock.send(word.encode())
     print('Отправка данных серверу')
+    data = sock.recv(1024).decode()
+    print(f"Получение сообщения от сервера обратно {data}")
     if word == 'exit':
         print('Разрыв соединения с сервером')
         sock.close()
