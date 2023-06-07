@@ -10,7 +10,6 @@ if host_name:
 else:
     sock.connect(('', port))
 
-
 print("Соединение с сервером")
 
 while True:
