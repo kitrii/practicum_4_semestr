@@ -152,7 +152,8 @@ class FileManager:
         'cp': cp,
         'cat': cat,
         'touch': touch,
-        'help': help
+        'help': help,
+        'write': write
     }
 
 
