@@ -1,1 +1,1 @@
-/Users/enagikh/UNIVER/practicum/FileManager
+/Users/enagikh/practicum_4_semestr/file_manager/test

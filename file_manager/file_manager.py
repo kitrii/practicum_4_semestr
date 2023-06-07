@@ -3,15 +3,27 @@ import shutil
 
 
 def help():
-    commands = ['создать', 'удалить', 'назад', 'переименовать', 'выход', 'показать', 'справка',
-                'где', 'показать', 'вперед', 'читать', 'редактировать',  'копировать', 'переход']
+    commands = ['create',
+                'delete',
+                'rename',
+                'read',  # только файл
+                'whereami',
+                'exit',
+                'help',
+                'copy',
+                'move',
+                'show',  # ls
+                'change',  # изменяем файл
+                'down',  # назад из папки
+                'up',  # вперед в папку
+                ]
     print(f'Доступны следующие команды:\n{commands}:')
 
 
 def exception():
-    print('Команда не распознана. Хотите вызвать помощника? [да/нет]')
-    yn = input()
-    if yn == 'да':
+    print('Команда не распознана. Вам нужна помощь? [да/нет]')
+    answer = input()
+    if answer == 'да':
         help()
     else:
         print('Разбирайтесь сами!')
@@ -27,7 +39,7 @@ def create(name, a):
             print('Файл уже существует. Попробуйте изменить название.')
     elif a == False:
         try:
-            print('Создаю папку...')
+            print('Создаю папку')
             os.mkdir(os.path.normpath(os.getcwd() + '/' + name), mode=0o777)
         except FileExistsError:
             print('Файл уже существует. Попробуйте изменить название.')
@@ -56,7 +68,7 @@ def rename(oldname):
     print('Введите новое имя:')
     newname = str(input())
     os.rename(oldname, newname)
-    print('Переименовано.')
+    print('Переименовано')
 
 
 def read(name, a):
@@ -66,7 +78,7 @@ def read(name, a):
         print(file.readlines())
         file.close()
     else:
-        print('Кажется это папка, а не файл.')
+        print('Такого файла нет. Возможно это папка')
 
 
 def change(name, a):
@@ -77,19 +89,19 @@ def change(name, a):
         print("Текст записан")
         file.close()
     else:
-        print('Кажется это папка, а не файл.')
+        print('Такого файла нет. Возможно это папка')
 
 
 def up(name, a):
     if a:
-        print('Кажется это файл, а не папка.')
+        print('Такой папки нет. Возможно это файл')
     elif not a:
-        print('Перехожу в папку {}...'.format(name))
+        print(f'Перехожу в папку {a}.')
         os.chdir(os.getcwd() + '/' + name)
         print(f'Текущая папка {os.getcwd()}')
 
 
-def copy(name, drr):
+def copy(name):
     copy_name = str(input("Укажите название копии: "))
     i = str(input('Укажите абсолютный путь до папки, куда создать копию: '))
     try:
@@ -100,7 +112,7 @@ def copy(name, drr):
         print('Для создания копии необходимо находится в папке оригинала.\nИ копировать можно только файлы.')
 
 
-def move(name, drr):
+def move(name):
     path = str(input('Укажите абсолютный путь до папки, куда переместить:'))
     try:
         fp = os.path.normpath(os.getcwd() + '/' + name)
@@ -117,7 +129,7 @@ def down(drr):
     if a == drr:
         print('Вы находитесь в корневой папке.')
     else:
-        print('Перехожу назад...')
+        print('Перехожу назад.')
         os.chdir('../..')
         print(f'Текущая папка {os.getcwd()}')
 
@@ -129,7 +141,7 @@ def main():
     os.chdir(drr)
 
     while True:
-        print('Введите команду:')
+        print('Введите команду: ')
         inp = input()
         try:
             act = str(inp).split(' ')
@@ -141,29 +153,41 @@ def main():
             else:
                 a = False
 
-        if act[0] == 'выход':
+        if act[0] == 'create':
+            create(str(act[1]), a)
+
+        elif act[0] == 'delete':
+            delete(str(act[1]), a)
+
+        elif act[0] == 'rename':
+            rename(str(act[1]))
+
+        elif act[0] == 'read':
+            read(str(act[1]), a)
+
+        elif act[0] == 'whereami':
+            print(os.getcwd())
+
+        elif act[0] == 'help':
+            help()
+
+        elif act[0] == 'copy':
+            copy(str(act[1]))
+
+        elif act[0] == 'exit':
             print('Всего доброго!')
             break
 
-        elif act[0] == 'справка':
-            help()
-
-        elif act[0] == 'создать':
-            create(str(act[1]), a)
-
-        elif act[0] == 'удалить':
-            delete(str(act[1]), a)
-
-        elif act[0] == 'переименовать':
-            rename(str(act[1]))
-
-        elif act[0] == 'где':
-            print(os.getcwd())
-
-        elif act[0] == 'показать':
+        elif act[0] == 'show':
             print(os.listdir())
 
-        elif act[0] == 'вперед':
+        elif act[0] == 'move':
+            move(str(act[1]))
+
+        elif act[0] == 'change':
+            change(str(act[1]), a)
+
+        elif act[0] == 'up':
             try:
                 up(act[1], a)
             except IndexError:
@@ -171,21 +195,8 @@ def main():
             except FileNotFoundError:
                 print('Папка не существует')
 
-        elif act[0] == 'назад':
+        elif act[0] == 'down':
             down(drr)
-
-        elif act[0] == 'редактировать':
-            change(str(act[1]), a)
-
-        elif act[0] == 'читать':
-            read(str(act[1]), a)
-
-        elif act[0] == 'копировать':
-            copy(str(act[1]), drr)
-
-        elif act[0] == 'переместить':
-            move(str(act[1]), drr)
-
         else:
             exception()
 
